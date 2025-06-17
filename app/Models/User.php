@@ -44,6 +44,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // CV_Builder Relationships
     public function cvPersonalInfo()
     {
         return $this->hasOne(CvPersonalInfo::class);
@@ -87,5 +88,15 @@ class User extends Authenticatable
     public function cvAddress()
     {
         return $this->hasOne(CvAddress::class);
+    }
+
+    public function cv_purchasedTemplates()
+    {
+        return $this->belongsToMany(CvTemplate::class, 'template_purchases');
+    }
+
+    public function cv_hasPurchasedTemplate($templateId)
+    {
+        return $this->cv_purchasedTemplates()->where('cv_template_id', $templateId)->exists();
     }
 }

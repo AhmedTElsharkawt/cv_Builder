@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/templates', [CvTemplateController::class, 'index'])->name('cvbuilder.templates.index');
     Route::get('/download/{template}', [CvTemplateController::class, 'download'])->name('cvbuilder.templates.download');
     Route::get('/{template}', [CvTemplateController::class, 'show'])->name('cvbuilder.templates.show');
+    Route::get('/purchase/{template}', [CvTemplateController::class, 'purchase'])->name('cvbuilder.templates.purchase');
 
 });
 

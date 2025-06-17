@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Services\CVBuilder;
 
 use App\Http\Controllers\Controller;
+use App\Models\CvTemplate;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\View;
 
@@ -10,7 +11,8 @@ class CvTemplateController extends Controller
 {
     public function index()
     {
-        return view('cvbuilder.templates.index');
+        $templates = CvTemplate::all();
+        return view('cvbuilder.templates.index', compact('templates'));
     }
 
     public function show($template)
@@ -40,6 +42,12 @@ class CvTemplateController extends Controller
         return $pdf->stream($filename);
         // أو للعرض في المتصفح inline:
         // return $pdf->stream($filename);
+    }
+
+    public function purchase($template)
+    {
+    //     $template = CvTemplate::findOrFail($template);
+    //     return view('cvbuilder.templates.purchase', compact('template'));
     }
 
 }

@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
 // });
 
 
-Route::middleware(['auth', 'verified'])->prefix('cvbuilder')->group(base_path('routes/cvbuilder.php'));
+Route::prefix('cvbuilder')->group(base_path('routes/cvbuilder.php'));
 
 
 require __DIR__.'/auth.php';
