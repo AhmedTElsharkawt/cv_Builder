@@ -12,7 +12,7 @@ use App\Http\Controllers\Services\CVBuilder\CvSkillController;
 use App\Http\Controllers\Services\CVBuilder\CvTemplateController;
 use App\Http\Controllers\Services\CVBuilder\CvTrainingController;
 
-Route::middleware(['auth'])->group(function () {
+Route::group(['prefix' => 'cvbuilder', 'middleware' => 'auth'],function () {
     Route::get('/personal-info/edit', [CvPersonalInfoController::class, 'edit'])->name('cvbuilder.personal_info.edit');
     Route::post('/personal-info', [CvPersonalInfoController::class, 'update'])->name('cvbuilder.personal_info.update');
 
