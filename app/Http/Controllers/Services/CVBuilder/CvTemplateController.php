@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Services\CVBuilder;
 
 use App\Http\Controllers\Controller;
 use App\Models\CvTemplate;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Support\Facades\View;
 
 class CvTemplateController extends Controller
@@ -29,12 +29,22 @@ class CvTemplateController extends Controller
 
     public function download($template)
     {
-        $user = auth()->user();
+        $user = auth()->user()->load([
+            'cvPersonalInfo',
+            'cvAddress',
+            'cvEducations',
+            'cvExperiences',
+            'cvTrainings',
+            'cvSkills',
+            'cvProjects',
+            'cvLinks',
+            'cvLanguages',
+        ]);
         if (! View::exists("cvbuilder.templates.views.$template")) {
             abort(404);
         }
         // يمكنك ضبط حجم الورق واتجاهه إذا أردت:
-        $pdf = Pdf::loadView("cvbuilder.templates.views.$template", compact('user'))
+        $pdf = SnappyPdf::loadView("cvbuilder.templates.views.$template", compact('user'))
                   ->setPaper('a4', 'portrait'); // أو 'landscape'
         // اسم الملف: يمكنك تخصيصه
         $filename = "{$user->name}_{$user->cvPersonalInfo->job_title} CV.pdf";

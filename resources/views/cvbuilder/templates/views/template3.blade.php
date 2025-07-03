@@ -106,8 +106,6 @@
         <div class="profile-img-wrapper">
             @if($user->cvPersonalInfo?->profile_image)
                 <img src="{{ asset('storage/' . $user->cvPersonalInfo->profile_image) }}" alt="Profile">
-            @else
-                <img src="{{ asset('images/default-avatar.png') }}" alt="Profile">
             @endif
         </div>
         <div class="header-bg">

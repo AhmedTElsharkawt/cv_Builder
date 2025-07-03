@@ -145,8 +145,6 @@
                 <div class="cv-sidebar">
                     @if(isset($user->cvPersonalInfo) && $user->cvPersonalInfo->profile_image)
                         <img src="{{ asset('storage/' . $user->cvPersonalInfo->profile_image) }}" alt="Profile Image" class="profile-img">
-                    @else
-                        <img src="{{ asset('images/default-avatar.png') }}" alt="Profile Image" class="profile-img">
                     @endif
                     <div class="name-title">
                         <h2>{{ $user->name }}</h2>
